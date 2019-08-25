@@ -1,0 +1,3 @@
+export SYSROOT=/home/sun/share/prj/RK3308/buildroot/output/firefly_rk3308_release/host/aarch64-rockchip-linux-gnu/sysroot
+CC_PATH=/home/sun/share/prj/RK3308/buildroot/output/firefly_rk3308_release/host/bin
+./configure CC=${CC_PATH}/aarch64-rockchip-linux-gnu-gcc --prefix=/home/sun/share/prj/bluetooth/install --host=arm-linux CPPFLAGS="-I${SYSROOT}/usr/include -I${SYSROOT}/usr/lib/dbus-1.0/include -I${SYSROOT}/usr/include/dbus-1.0 -L${SYSROOT}/usr/lib -L${SYSROOT}/lib64"
