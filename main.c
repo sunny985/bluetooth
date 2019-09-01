@@ -42,10 +42,10 @@ int main (void) {
     sigaction(SIGINT,  &sa, NULL);
 
     sleep(3);
-    addProfile("/foo/bar/profile0", "0000110b-0000-1000-8000-00805f9b34fb", "a2dp_sink", 0);
-    addProfile("/foo/bar/profile1", "0000110a-0000-1000-8000-00805f9b34fb", "a2dp_souce", 0);
-    addProfile("/foo/bar/profile2", "0000110e-0000-1000-8000-00805f9b34fb", "avrcp_control", 0);
-    addProfile("/foo/bar/profile3", "0000110c-0000-1000-8000-00805f9b34fb", "avrcp_control", 0);
+    //addProfile("/foo/bar/profile0", "0000110b-0000-1000-8000-00805f9b34fb", "a2dp_sink", 0);
+    //addProfile("/foo/bar/profile1", "0000110a-0000-1000-8000-00805f9b34fb", "a2dp_souce", 0);
+    //addProfile("/foo/bar/profile2", "0000110e-0000-1000-8000-00805f9b34fb", "avrcp_control", 0);
+    //addProfile("/foo/bar/profile3", "0000110c-0000-1000-8000-00805f9b34fb", "avrcp_control", 0);
 
     
     while (!terminate) {
@@ -68,7 +68,11 @@ int main (void) {
             //connectProfile(DEFAULT_DEVICE_PATH, "0000110e-0000-1000-8000-00805f9b34fb");//avrcp remote
             connectProfile(DEFAULT_DEVICE_PATH, "0000110a-0000-1000-8000-00805f9b34fb");//a2dp souce
             connectProfile(DEFAULT_DEVICE_PATH, "0000110c-0000-1000-8000-00805f9b34fb");//avrcp control
-        } 
+        } else if (strstr(cmd, "Play")) {
+            mediaPlayerControl("dev_50_8F_4C_E5_04_D9", "Play");
+        } else if (strstr(cmd, "Pause")) {
+            mediaPlayerControl("dev_50_8F_4C_E5_04_D9", "Pause");
+        }
     }
 
 exit:

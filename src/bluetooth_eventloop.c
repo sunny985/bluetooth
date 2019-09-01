@@ -491,7 +491,7 @@ static int setUpEventLoop(tBluetoothEvent *nat){
 
 static int interface_added(DBusMessage *msg) {
 	const char *path;
-    DBusMessageIter iter = { 0 };
+    DBusMessageIter iter = { 0 }, subiter = { 0 };
     DBusError err;
     dbus_error_init(&err);
     if (!dbus_message_iter_init(msg, &iter))
@@ -501,6 +501,30 @@ static int interface_added(DBusMessage *msg) {
 
 	dbus_message_iter_get_basic(&iter, &path);
     printf("path = %s\n", path);
+
+	/* a{sa{sv}} */
+	dbus_message_iter_next(&iter);
+	if (dbus_message_iter_get_arg_type(&iter) != DBUS_TYPE_ARRAY ||
+		dbus_message_iter_get_element_type(&iter) != DBUS_TYPE_DICT_ENTRY)
+		goto failure;
+	dbus_message_iter_recurse(&iter, &subiter);
+
+	while (dbus_message_iter_get_arg_type(&subiter) == DBUS_TYPE_DICT_ENTRY) {
+		DBusMessageIter value, entry;
+		const char *key;
+
+		dbus_message_iter_recurse(&subiter, &entry);
+		dbus_message_iter_get_basic(&entry, &key);
+		printf("interface_added key <%s>\n", key);
+		dbus_message_iter_next(&entry);
+		//dbus_message_iter_recurse(&entry, &value);
+
+		//if (parse_ext_opt(ext, key, &value) < 0)
+		//	error("Invalid value for profile option %s", key);
+
+		dbus_message_iter_next(&subiter);
+	}
+	
     return 0;
 failure:
     LOG_AND_FREE_DBUS_ERROR_WITH_MSG(&err, msg);

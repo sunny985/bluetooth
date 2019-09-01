@@ -5,6 +5,7 @@
 #include <pthread.h>
 #include <stdint.h>
 #include <sys/poll.h>
+#include <stdint.h>
 
 #include <dbus/dbus.h>
 #include <bluetooth/bluetooth.h>
@@ -18,6 +19,7 @@
 #define ADAPTER_IFC BLUEZ_DBUS_BASE_IFC ".Adapter1"
 #define DEVICE_IFC BLUEZ_DBUS_BASE_IFC ".Device1"
 #define PROFILE_MANAGER_IFC BLUEZ_DBUS_BASE_IFC ".ProfileManager1"
+#define MEDIA_PLAYER_IFC BLUEZ_DBUS_BASE_IFC ".MediaPlayer1"
 
 #define REMOTE_AGENT_PATH "/sun/bluetooth/remote_device_agent"
 #define LOCAL_AGENT_PATH "/sun/bluetooth/agent"
